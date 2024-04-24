@@ -2,6 +2,7 @@ from textsummarizer.pipeline.stage01_data_ingestion import DataIngestionTrainPip
 from textsummarizer.pipeline.stage02_data_evaluation import DataValidationTrainPipeline
 from textsummarizer.pipeline.stage03_data_transformation import DataTransformationTrainPipeline
 from textsummarizer.pipeline.stage04_model_trainer import ModelTrainerTrainPipeline
+from textsummarizer.pipeline.stage05_model_evaluation import ModelEvaluationPipeline
 from textsummarizer.logging import logger
 
 STAGE_NAME = "Data Ingestion Stage"
@@ -38,6 +39,16 @@ STAGE_NAME = "Model Training Stage"
 try:
     logger.info(f"{STAGE_NAME} started")
     model_trainer = ModelTrainerTrainPipeline()
+    model_trainer.main()
+    logger.info(f"{STAGE_NAME} completed")
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "Model Evaluation Stage"
+try:
+    logger.info(f"{STAGE_NAME} started")
+    model_trainer = ModelEvaluationPipeline()
     model_trainer.main()
     logger.info(f"{STAGE_NAME} completed")
 except Exception as e:
